@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/main.css">   
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"></script>
+
+    <script  type="module" src="js/reservas.js"></script>
+    <title>Reservas</title>
+</head>
+<body>
+   <header>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="" title="Reservas realizadas por los clientes"> Reservas </a>           
+                <a class="navbar-item" href=""> Trabajadores </a>           
+                <a class="navbar-item" href=""> Clientes </a>
+            </div>
+        </nav>
+   </header> 
+   <main class="main-content">
+        <div class="crud-container">
+            <div class="crud-header">
+                <h1>Reservas Registradas</h1>
+                <button class="button is-success" id="nuevaReserva">Nueva Reserva</button>
+            </div>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th>Usuario</th>
+                    <th>Actividad</th>
+                    <th>Integrantes</th>
+                    <th>Descripción</th>
+                    <th>Duración</th>
+                    <th>Precio</th>
+                    <th>Opciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>1</th>
+                    <th>1</th>
+                    <td>38</td>
+                    <td>23</td>
+                    <td>12</td>
+                    <td>3</td>
+                    <td>
+                        <button class="button is-warning">
+                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none"><path d="M4253 5080 c-78 -20 -114 -37 -183 -83 -44 -29 -2323 -2296 -2361 -2349 -21 -29 -329 -1122 -329 -1168 0 -56 65 -120 122 -120 44 0 1138 309 1166 329 15 11 543 536 1174 1168 837 838 1157 1165 1187 1212 74 116 105 270 82 407 -7 39 -30 105 -53 154 -36 76 -55 99 -182 226 -127 127 -150 145 -226 182 -135 65 -260 78 -397 42z m290 -272 c55 -27 258 -231 288 -288 20 -38 24 -60 24 -140 0 -121 -18 -160 -132 -279 l-82 -86 -303 303 -303 303 88 84 c49 46 108 93 132 105 87 42 203 41 288 -2z m-383 -673 l295 -295 -933 -932 -932 -933 -295 295 c-162 162 -295 299 -295 305 0 13 1842 1855 1855 1855 6 0 143 -133 305 -295z m-1822 -2284 c-37 -12 -643 -179 -645 -178 -1 1 30 115 68 252 38 138 79 285 91 329 l21 78 238 -238 c132 -132 233 -241 227 -243z"/><path d="M480 4584 c-209 -56 -370 -206 -444 -414 l-31 -85 0 -1775 c0 -1693 1 -1778 18 -1834 37 -120 77 -187 167 -277 63 -63 104 -95 157 -121 146 -73 3 -69 2113 -66 l1895 3 67 26 c197 77 336 218 401 409 22 64 22 74 25 710 3 579 2 648 -13 676 -21 40 -64 64 -114 64 -33 0 -49 -7 -79 -34 l-37 -34 -5 -634 c-5 -631 -5 -633 -28 -690 -41 -102 -118 -179 -220 -220 l-57 -23 -1834 -3 c-1211 -1 -1853 1 -1890 8 -120 22 -227 104 -277 213 l-29 62 0 1760 0 1760 29 63 c37 80 122 161 203 194 l58 23 630 5 c704 6 664 1 700 77 23 48 13 95 -31 138 l-35 35 -642 -1 c-533 0 -651 -3 -697 -15z"/></g></svg>
+                        </button>
+                        <button class="button is-danger">
+                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none"><path d="M2015 5100 c-137 -54 -195 -160 -195 -362 l0 -68 155 0 155 0 0 70 0 70 430 0 430 0 0 -70 0 -70 156 0 157 0 -5 113 c-7 167 -50 248 -168 309 l-45 23 -510 2 c-484 2 -513 1 -560 -17z"/><path d="M825 4351 c-46 -11 -91 -38 -113 -66 -22 -27 -142 -376 -142 -410 0 -35 35 -88 71 -107 32 -17 112 -18 1917 -18 1616 0 1888 2 1917 14 40 17 75 68 75 111 0 41 -106 356 -133 396 -29 43 -65 68 -113 79 -46 11 -3435 11 -3479 1z"/><path d="M1044 3421 c-50 -30 -64 -58 -64 -125 0 -133 240 -3022 255 -3071 21 -69 62 -124 119 -163 98 -65 40 -63 1232 -60 l1079 3 47 22 c70 32 131 94 162 164 27 60 29 72 152 1596 l124 1536 -20 43 c-39 80 93 74 -1572 74 -1442 0 -1484 -1 -1514 -19z m676 -349 c44 -22 77 -71 85 -125 3 -23 39 -594 80 -1269 82 -1337 81 -1263 24 -1315 -75 -69 -193 -49 -238 40 -20 39 -26 115 -97 1272 -42 677 -74 1251 -71 1276 9 109 119 171 217 121z m928 -9 c14 -10 35 -32 46 -47 21 -27 21 -30 21 -1311 0 -1281 0 -1284 -21 -1311 -31 -43 -67 -65 -112 -71 -57 -8 -121 25 -150 76 l-22 39 0 1267 0 1267 21 38 c30 54 82 82 142 77 27 -2 60 -13 75 -24z m910 0 c48 -36 65 -78 64 -154 -4 -191 -144 -2468 -153 -2492 -26 -64 -110 -107 -179 -92 -44 10 -98 60 -110 103 -8 28 7 334 64 1289 62 1045 78 1258 92 1288 15 33 48 64 84 78 29 12 111 0 138 -20z"/></g></svg>
+                        </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+   </main>
+   <div class="modal" id="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Nueva Reserva</p>
+        <button class="delete" aria-label="close" id="cerrar1"></button>
+      </header>
+      <section class="modal-card-body">
+        <form id="registro">
+            <div class="field">
+                <div class="field">
+                    <label class="label">Usuario</label>
+                    <div class="control has-icons-left has-icons-right">
+                      <input class="input is-danger" type="email" name="usuario" placeholder="Email del usario que realiza la reserva">
+                      <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                      </span>
+                      <span class="icon is-small is-right">
+                        <i class="fas fa-exclamation-triangle"></i>
+                      </span>
+                    </div>
+                    <p class="help is-danger">No es un email valido</p>
+                  </div>
+                <label class="label">Actividad</label>
+                <div class="control">
+                  <input class="input" type="text" name="actividad" placeholder="Actividad a realizar">
+                </div>
+                <label class="label">Integrantes</label>
+                <div class="control">
+                  <input class="input" type="number" name="integrantes" placeholder="Ten en cuenta el máximo de la actividad">
+                </div>
+                <label class="label">Duración</label>
+                <div class="control">
+                  <input class="input" type="text" name="duracion" placeholder="Especificar min/h">
+                </div>
+                <label class="label">Precio</label>
+                <div class="control">
+                  <input class="input" type="text" name="precio" placeholder="Por persona">
+                </div>
+                <div class="field">
+                    <label class="label">Descripción</label>
+                    <div class="control">
+                      <textarea class="textarea" name="descripcion" placeholder="Información relevante sobre la actividad"></textarea>
+                    </div>
+                </div>
+            </div>
+      </section>
+      <footer class="modal-card-foot">
+        <div class="buttons">
+          <button class="button is-success" type="submit">Agregar</button>
+          <button class="button" id="cerrar2">Cerrar</button>
+        </div>
+      </footer>
+      
+    </form>
+    </div>
+  </div>
+  
+</body>
+</html>
